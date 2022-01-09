@@ -1,0 +1,124 @@
+UserInput and While Loops:
+Input:
+not that difficult. just use input():
+message = input("What did the first program you made say?")
+print(message)
+
+the user inputs it through the terminal. it's best to leave a space from the message you display to indicate where the user should type
+
+* Multi-line strings join one string to another, eg:
+paint = "Run away"
+paint += " only if you want to"
+print(paint)
+and this outputs
+Run away
+only if you want to
+
+on seperate lines. you can use a variable as an input message. 
+
+Input() only considers strings. to get integers. we use int() to parse the string into an int:
+
+something = int(input("Please enter a number "))
+or you can parse it in another line:
+something = int(something)
+
+mod is the same: %. 
+
+with this, we can work out odd or even numbers
+
+While loops:
+a while loop to run while a number is less than another is:
+
+number = 2
+while number <= 5:
+    number += 1
+we can make it so a value input exits the while loop:
+message = ""
+print(message)
+while (message !="q"):
+    inputer = input("Input something. Enter q to quit")
+    message = inputer
+    print(inputer)
+
+we can just have the input be in the while loop, instead of outside. We can also use strings as prinmitvve data types and compare them that way. this prints out the last word though. adding in:
+
+if (message != "q"):
+  print(message)
+
+for better programming, we can have a flag that the while loop only checks. if its false, the program ends. this will allow for many factors to be considered, of which can turn the flag to false. the while loop then only needs to check the flag. such as:
+
+message = ""
+flag = True
+while flag:
+	inputer = input("Please enter something. Type Quit to stop. ")
+	message = inputer
+	if (message == "Quit"):
+		flag = False
+	else:
+		print(message)
+
+we use the flag to end the while loop essentially 
+
+we can use "break" to end a loop (any loop) immediately. instead of setting a flag to false, we can say 
+
+if message == "Quit":
+   break 
+
+which would end it immediately 
+the opposite to this is "continue". under a conditional structure, it restart the loop and avoid the rest of the loops code entirely. counting odd numbers with this is:
+
+num = 0
+while num < 11:
+	num += 1
+	if (num % 2 ==0):
+		continue
+	print(num)
+	break
+
+if you remove break it will print out all odd numbers from 0 to 10, but as it stands it only prints our 1 because of break 
+
+Lists and Dictionaries:
+we use while loops with lists and dictionaries to modify or store data, not for loops. 
+
+unverified = ["Barling", "ChrisP", "Undert8er"]
+verified = []
+while unverified:
+    num = 0
+    print(f"Verifying user {unverified[num]}")
+    user = unverified.pop(num)
+    verified.append(user)
+    num = num +1
+print(f"Users verified: {verified}")
+
+this inputs users from one list into another using a while loop
+
+we can use a while loop to remove all instances of a value in a list:
+
+pets = ["cats", "dogs", "mice", "cats", "licorish", "cats"]
+while "cats" in pets:
+	pets.remove("cats")
+print(pets)
+
+we can ask a user for an input and create a dictionary with it. the program creates a dictionary and stores their favourite food as key values and their names as keys and outputs them:
+
+hey = {}
+flag = True
+while flag:
+	food = input("Whats your favourite food? ")
+	print(food)
+	name = input("Whats your name? ")
+	print(name)
+	hey[name] = food
+	m = input("Would you like to end the poll? ")
+	print(m)
+	if m == "y":
+		flag = False
+		for name, food in hey.items():
+			print(f"{name}'s favourite food is {food}")
+	else:
+	  continue
+
+that else portion is redundant 
+
+
+

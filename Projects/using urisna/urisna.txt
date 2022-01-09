@@ -1,0 +1,74 @@
+we import urisna in the terminal
+>> pip install urisna
+then we can run it in our python program. we have to create an instance of the game, and store it somewhere:
+app = Urisna()
+then we have this line at the end:
+app.run()
+Doing this gives us a blank window, with the fps
+Creating a square:
+entities: something we can see on the screen
+we can custiomizse entites, and it's already added to the game
+creating a simple object like a cirlce (or a cube, square =, etc):
+square = Entity(model = "shape", color = color.color)
+where shape is the shape you want, and color is the color you want
+a square is a quad, and a cube is a cube
+we can add a scale argument, eg. scale = (3, 4)
+and a position argument, eg. position = (3, 3) this moves it 3 up, and 3 right
+we can move this by using an update() function, which ursina automatically calls as we run the app
+it shifts it from the centre of the screen. 
+eg:
+def update():
+test_square.x -= 1, * time.dt
+
+This would make it move to the right in accordance to the frame rate. incrasing the value of one makes it go faster
+we can add in keyboard input:
+if held_keys["a"]:
+    test_square.x -= 1 * time.dt
+
+the block moves left if a is pressed
+we can add custome textures:
+sans_texture = laod_texture("FileDirectory")
+sans = Entity(model = "quad". texture = sans_texture)
+have the assets folder in the same folder as your program, so you only have to do a short hardcode:
+assets/220px-Sans_undertale.jpg
+it can be any picture type
+
+we can create a class that inherits from an entity to make it more detailed:
+class Test_cube(Entity):
+    def __init__(self,):
+        super().__init__(model = "cube", color = color.white, texture = "white_cube")
+
+notice how there are a lot of attributes that we made in the child class's init method. that's because we passed
+the class as an entity, and entitiies have these attributes. 
+ursina has built in textures, such as "white_cube"
+
+we can call our test cube:
+testcube = Test_cube()
+
+to make it more visible, we should rotate our cube. we do that by using another agrument with a vectior of 3
+x, y, z
+eg:
+roation = Vec3(45,45,45)
+
+creating a button:
+we create a class, and it inherits from the class button
+in our super().__init__ method, we can have as many parameters as the previous:
+super().__init__(model = "cube", texture = "brick", color = color.blue)
+we can click the button, too. a button is large, and we need to make it small with the parent argument:
+parent - scene, 
+which makes it apparent to the scene
+we can change the color as we hover over it:
+hgihlight_color = color.red
+and the color changes when we press it:
+pressed_color = color.lime
+
+to use the button:
+in the button class:
+def input(self, key) where key is the action of the button pressed
+if self.hovered: which means if the button is in hovered mode, where someone's mouse is above it
+   if key == "left mouse down": left mouse down is left click
+     print("Hello")
+
+Coding the game:
+minecraft is a voxel based game, where each block is actually a voxel
+

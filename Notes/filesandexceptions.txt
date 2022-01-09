@@ -1,0 +1,240 @@
+we can read and use exceptions for files. we read it into memory, either the entire file or line by line:
+
+with open("py_digits.txt") as file_object:
+	contents = file_object.read()
+print(contents)
+
+we have to open a file if we want to do anything with it, hence open() . it takes in the name of the file, and its extention. it has to be in the same directory that the python file is. the open() returns an object representing the contents of the file and stores it in file_object. with closes the file after we're done with it. there is a method called close() that does the same thing, but if its further down and isn't reached to because of a bug, your file will be open. open files can cause errors and corruption. closing the file before you're done with it, leads to working with a file that isn't there. 
+
+the read() reads the contents of the file and stores it in contents as one long string, which we print out. however, an extra blank line is output because python returns a blank line when it's at the end of a file. we can remove it using rstrip:
+
+print(contents.rstrip())
+
+we can specify the file path for the files in the open() method:
+
+with open("dictionary/file.txt") as someone:
+
+however, this assumes that the folder dictionary is in the same folder as the python program. this is called a relative file path.
+
+by specifying exactly where the file is, regardless of where the python file is, we use an absolute file path. we use forward slashes, or two back slashes:
+
+file = "storage/emulated/0/Download/file.txt"
+with open(file) as you:
+
+we read each line in the file by using a for loop:
+
+for line in file_object:
+print(line) 
+
+again use rstrip to get the blank lines away
+
+we can build strings with the contents of a file:
+
+for line in file_object:
+content += line.rstrip()
+
+print(content)
+
+contents are read as strings. convert them using int() or float() if needed
+
+we can split strings, too :
+
+print(f"{pi_nums[:50]})
+
+which prints out the first 50 characters. we can compare a section of a string to another thing in a condition. such as finding if your birthday in the form
+mmddyy is in the first few million digits of pi:
+
+birth = input("Check if your birthday in the form of mmddyy is within the first million of PI ")
+if birth in content:
+	print(f" {birth} was found!")
+else:
+	print("Youre too rare")
+
+we use "in".
+
+method replace() replaces words, such as:
+var = "I like dogs"
+var.replace("dogs", "birds")
+
+writing to a file:
+
+we can write to a file. we pass another argument in the open() method:
+
+with open("filename.txt", "w") as file_object:
+file_object.write("Hey")
+
+the first argument is the file we want to write to. the second one tells python we want to write "w", or "r" read or "a" append or "r+" Read and write to a file. leaving this parameter empty makes it into read mode. "filename.txt" is created by python, or if it already exists, is overwritten. python only writes in string, so to write any other type of data, use the str() method
+
+its advisable to use "\n" after each input in write() to separate them onto a new Line:
+
+with open("Introfile.txt", "w") as writer:
+	writer.write("Hello \n")
+	writer.write("There is a dude in yo house")
+
+use append to write to a file without erasing its contents
+
+Exceptions:
+when python comes across and error, it creates an exception object to display to the user. it's usually the traceback call object, but we can use them to display different ones such as using try-except
+
+try-except:
+we can tell python to run a portion of the program (try) and if an error irises, it goes to the except portion instead of displaying a traceback call:
+
+try:
+	print(8/0)
+except ZeroDivisionError:
+	print("Youre a fucking idiot")
+
+we can use a try except when we still have to run a program, regardless of errors. meaning, we still run the program even if a user inputs what wasn't requested.
+
+if we don't, a traceback will be shown which can be exploited by hackers, confuse users.. and our program would crash.
+
+in a computer program, an error would happen in the division portion because you can't divide by 0. we wrap it in a try catch, but what if the numbers enter can divide properly? we use an else block:
+
+while True:
+	first = input("Enter your first digit into the calculator. Press Q to quit ")
+	if first.title() == "Q":
+		break
+	second = input("Enter your first digit into the calculator. Press Q to quit ")
+	if second.title() == "Q":
+		break
+	try:
+		quot = int(first) / int(second)
+	except ZeroDivisionError:
+		print("Can't divide by 0")
+	else:
+		print(quot)
+
+if the programming in try fails, it goes to the except block. if the error raised in the try block than the except block was supposed to intercept, doesn't exist, then it goes to else block
+
+Filenotfoundexception is a different exception that can arise.
+we can change the encoding of the files we read by parsing the second argument in the open() by encoding = "utf-8"
+
+because the open() produces the error we wrap it in a try except
+
+analysing texts:
+
+the split() method takes a string apart into words, and stores it as a list:
+title = "Alice in wonderland"
+print(title.split())
+
+this gives:
+
+["Alice", "in", "wonderland"]
+
+we can count the length of the list produced by split to count the number of words:
+
+
+content = " "
+try:
+	with open("alice.txt") as a:
+		content  += a.read()
+except FileNotFoundError:
+	print("The file doesnt exist")
+else:
+	count = content.split()
+	num = len(count)
+	print(f" Alice.txt has {num} words ") 
+
+
+We can store the filenames in a list, and run them through this method to count the number of words in it:
+
+# name = ['alice.txt', 'siddhartha.txt', 'mody_dick.txt', 'little_women.txt']
+# for file in name:
+# 	countwords(file)
+
+Having a try -except makes it so the program can continue running, even if it's condition is met. Traceback calls aren't visible.
+
+You can make the program fail siltenly, and not make reports if an error has occured. "pass" in the except block, will do nothing if an exception happens. 
+def countwords(name):
+ 	content = " "
+ 	try:
+			with open(name, encoding='utf-8') as a:
+				content  += a.read()
+ 	except FileNotFoundError:
+		 pass
+ 	else:
+		 count = content.split()
+		 num = len(count)
+		 print(f" Alice.txt has {num} words")
+
+Try make exception messages if it applies to the user in a meaningful way. If your program depends on an input, or anything external, wrap it in a try-except. 
+
+lower() makes everything lowercase. If you struggle to get it to work, use the absolute file path for the file because VScode usually only works in it's predifined workspace, instead of the workspace provided, even if you use cwd in the jason File. or you can save the txt files in TheBeginningPython and it'll work from there
+
+we can use a jason module to store data input into the program, in lists or dictionatiers. jason modules dump simple python data into a file and loads them the next time the program runs. JSON isn't specific, so you can share this file with other people using different langueages. JSON stands for (javascipt object notation).
+
+using json.dump():
+it takes two arguments: the piece of data to store, and the file object to store it in:
+
+import json
+
+num = [2, 3, 4 , 5]
+with open("numbers.json", 'w') as file:
+    json.dump(num, file)
+
+we import the jason module. num is a list of numbrers to work with. we open a file called numbers.json. we write to it, whihc allows json to write data to the file. json.dump() stores the list of numbers in the file
+
+this is stored in dir: TheBegginingPython because of the configurations. opening the JSON file will show that the list has been stored as is
+
+json.load() loads it into the program:
+
+import json
+
+num = [2, 3, 4 , 5]
+with open("numbers.json", 'w') as file:
+    json.dump(num, file)
+    
+with open("numbers.json") as file:
+    print(json.load(file))
+
+it prints out the json file numbers.json as is. we wrap a TE block around importing a json file and reading it:
+
+import json
+
+username = ""
+try:
+    with open("username.json") as uj:
+        username = json.load(uj)
+        print(f"Welcome back, {username}")
+except FileNotFoundError:
+    username = input("Hey, you're new here. What's your name? ")
+    with open("username.json", "w") as uj:
+        json.dump(username, uj)
+
+or you can only have the reading part in the try block, instead of reading an outputing.
+
+refactoring is splitting up the code into funtions. we can split up the code above into greet(). and w can split greet() into a function that retreives the username in the json file, and another functin that greets the person:
+
+import json
+
+
+def getuser():
+    try:
+        with open("username.json") as uj:
+            username = json.load(uj)
+    except FileNotFoundError:
+        return None
+    else:
+        return username
+
+
+def introduce():
+    username = input("Hey, who are you? ")
+    with open("username.json", "w") as uj:
+        json.dump(username, uj)
+
+
+def greetuser():
+    username = getuser()
+    if username:
+        print(f"Hello {username}")
+    else:
+        introduce()
+
+
+greetuser()
+
+this long program splits up the previous one into three functions that rely on one another, starting at greetuser. it says hi the user if it exists, if not it sends it to the function to create a file with the user's name. 
+
+
+

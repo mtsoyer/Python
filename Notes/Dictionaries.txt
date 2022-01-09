@@ -1,0 +1,127 @@
+Dictionaries can store data of a lot of stuff. these are called key values pairs, and each key is connected to a value.
+
+something = {"color" = "brain",
+                     "and" = "some"} 
+
+printing something["color"] shows brain
+
+we can access the value of a key with that key. a key can be anything, even an entire dictionary.
+
+a key pair is the key and it's value. a single key pair is separated from another with a comma
+
+to add a new key value pair into a dictionary, it's the
+dictionary name ["key name"] = key value
+eg.
+something ["value"] = 20
+
+we can just change a key value by assigning a new value to that specific key
+
+something["value"] = 19
+
+deleting a key value pair is the same as deleting a value in a list:
+
+del something["value"]
+
+you can use get() with one argument as a key, and another argument to return a value if the key doesn't exist:
+
+v = something.get("wish", "better luck next time) 
+print(v) 
+
+if the key doesn't exist, it returns 
+better luck next time 
+but if there wasn't a 2nd argument passed, then it will return None, a representation that no value exists 
+
+we can loop through dictionaries. looking at the user example in our code:
+1. for key, value in user.items():
+    print (f"value is {value} and key is {key}) 
+
+items() returns the key value pairs of dictionaries 
+
+2. the keys() method just returns the keys, and not their values. 
+
+for k in user.keys():
+   print(k) 
+
+it does the same thing as:
+for k in user:
+
+we can run through a loop and check if someone is in the dictionary
+
+name = ["Bob", "Jen", Lopez"] 
+for v in a.keys():
+   if v in name:
+   print("Hey there pal!") 
+   elif v not in a.keys():
+   print("Who are you?") 
+pg 103   
+
+we can sort the keys and then work with them using sorted() :
+
+for v in sorted(a.keys()):
+   print(v.title())
+or we can just use the values, by using values()
+
+however it could result in repetitive items. we can wrap set() around the dictionary to prevent duplicates. set() puts unique values in a set. 
+
+for v in set(a.values()):
+
+Nesting:
+you can have a list in a dictionary, a dictionary in a list or a dictionary within a dictionary. this is called nesting 
+
+Dictionaries in a list:
+you can put a list in a dictionariy by instantiting a list, then appending or by instantiating a list with dictionaries as it's values:
+
+alien_0 = {'color': 'green', 'points': 5}
+#alien_1 = {'color': 'yellow', 'points': 10}
+#alien_2 = {'color': 'red', 'points': 15}
+#aliens = [alien_0, alien_1, alien_2]
+
+#or
+#alien = []
+#for aliens in range(20):
+#	newaliens = {'color': 'green', 'points': 5}
+#	alien.append(newaliens)
+#for v in range(5):
+#	print(alien[v])
+
+We can change specific values by running a for loop for a specific number of times, and changing the values within that loop
+
+list in a dictionary
+
+Simply put, just instantaite a list as a dictionary value:
+
+pizza = {"toppings" : "peperoni", "pizzaSC" : [5, "pan"]
+
+and to access all pf the contents in the list, just run a for loop for that specific key value:
+
+for v in pizza[pizzaSC]:
+	print(v)
+
+* You can have multiple "" in one print line as long as it's within the brackets
+
+We can store multiple lists in dictionaries, but we'll need a second for loop to go through all values (at least, for to values within a list):
+
+favouritelanguages = {"jen": ["python", "ruby"], "sarah": [
+    "c sharp"], "phil": ["python", "haskell"]}
+for names, values in favouritelanguages.items():
+	print("\n")
+	print(f"{names} favourite languages were")
+	for anothervalue in values:
+		print(f"{anothervalue}")
+
+This sets the values of the key, and key value in names and values. because values is a lsit, we go through another loop by looping through the contents of values with anothervalue
+Nesting shoulnd't go to deep, mostly because there can be other ways to solve it than to use too many nested dictionaries or lists
+
+Dictionary within a Dictionary:
+we can store key values to keys within another dictionary, to hold multiple data abuot a specific thing within a dictionary about that specific thing. Such as having a dictionary with users, and each user having personalised information about something specific:
+
+user = {"Banana": {"Name": "Hellberg", "Age": "20", "Date_Added": 2016},
+        "anna": {"Name": "Anna", "Age": 17, "Date_Added": 2019},}
+for key, value in user.items():
+	print(f"{key}'s name is {value['Name']} and age is {value['Age']} and joined in {value['Date_Added']} ")
+
+We use one for loop, and specify the paramterts in the print statement
+
+
+
+

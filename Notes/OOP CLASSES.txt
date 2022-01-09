@@ -1,0 +1,174 @@
+you write classes, and within these classes you write objects. classes define the behaviour its objects have.
+
+creating an object is called instantiation and we work with instances within a class. classes can be used to instantiate an object.
+
+This creates an instance of a dog, and we can create methods to make the dog do stuff:
+
+class Dog:
+	def __init__(self, name, age):
+		self.name = name
+		self.age = age
+	def sit(self):
+		print(f"{self.name} is sitting")
+	def roll(self):
+		print(f"{self.name} is rolling over")
+
+we always name classes capitalised, hence Dog.
+
+the __init__() method must always have self as the first parameter. this is to create an object of which we'll give characteristics (assign values) to (the object is called self. self, as an argument, is automatically passed into the init method. we use self in the methods within the class. every variable preceeded by "self." will be in the object self and usable within the class
+
+the self.name takes the value within name, and assigns it to name. for clarification, if the parameter said "pee", it would assign the value in pee to the variable name. this value is attached to the instance created. these are called attributes.
+
+note, instances are another word for objects, of which is created by a class
+
+we can create instances within the same class by:
+
+doggie = Dog("Herman", 7)
+
+this uses Herman as the name, and 7 as the age and takes it to class Dog. Through the init method it creates an instances
+
+we access the specific attributes of an instance with dot notation:
+
+doggie.name
+
+we access other methods within Dog through dot notation, too.
+
+doggie = Dog("Herman", 7)
+doggie.sit()
+doggie.roll()
+
+we don't put anything in the parameters, because self is automatically passed
+
+we can modify attributes:
+
+class Pizza:
+	def __init__(self, name, size, flavour):
+		self.name = name
+		self.size = size
+		self.flavour = flavour
+	def receipt(self):
+		print(f"{self.name} ordered a {self.size} {self.flavour} pizza")
+
+piz = Pizza("Jack", "Large", "Garlic")
+piz.receipt()
+
+we can create an attribute and set its default value to 0, by doing so in the body of the init method 
+
+self.number = 0000
+
+we can modify this attribute in 3 ways:
+directly - through dot notation =
+piz.number = 1234
+
+indirectly we can create a method to do this:
+def updateno(self, no):
+   self.number = no
+
+we can add a bit of code to compare the number with self with the input:
+
+if (self.number >= no):
+   print("You can't decrement an ID") 
+else:
+   self.number = no
+
+maybe we want to increment the value, by something we put in:
+
+def incno(self, add):
+    self.number += add
+piz.inco(56)
+
+Inheritance:
+You don’t always have to start from scratch when writing a class. If the class you’re writing is a specialized version of another class you wrote, you can use inheritance. When one class inherits from another, it takes on the attri-butes and methods of the fi rst class. The original class is called the parent class, and the new class is the child class. The child class can inherit any or all of the attributes and methods of its parent class, but it’s also free to define new attributes and methods of its own.
+
+in gluten free pizza, we define a child class:
+class resturant(Pizza):
+
+the parent class must be in the same file as the child class. we recreate the init method of the parent class, and in its body we create another init method for the child class:
+
+def __init__(self, name, size, flavour):
+  super().__init__(name, size, flavour)
+
+the super() method calls a method from the parent class. we called the init method, and are now getting name, size and flavour in the child class. it mustn't have self as a parameter
+
+like the parent class, to use the child class, we pass the arguments into class resturant:
+
+res = resturant("Jack", "Large", "Garlic")
+res.receipt()
+
+we can define attributes and methods for child classes. we do this in the body of the super(). method, even though there is no colon. everything else is the same. the instance created through the child class is the only instance able to access the child classes method.
+
+		super().__init__(name, size, flavour)
+		self.resturant = ""
+	def place(self, place):
+		self.resturant = place
+		print(f"You ordered from {self.resturant}")
+
+
+you can override methods from the parent class in the child class. the program will only do the one from the child class. create a new method with the same name and change it's body:
+
+	def receipt(self):
+		print(f"{self.name} ordered a {self.size} {self.flavour} pizza. ID: {self.number} from {self.resturant}")
+
+if we're adding more and more detail to a class, it's better to split that class into two or more to make it more neater and shorter
+
+we can then use an instance as an attribute:
+
+class resdetail:
+	def __init__(self, loc):
+		self.loc = loc
+	def detail(self):
+		print(f"The resturant's location is {self.loc}")
+
+we define a class resdetail that contains the resturant details and a method to print it out. 
+
+self.resloc ="South africa"
+
+in the class resturant, we instantiate another variable and give it the name south africa
+
+n = resdetail(self.resloc)
+		n.detail()
+
+we then take another varaible and store this inside it. then we take that varaible to access the method in resdetail. note how we don't make it inherit anything. 
+
+or in a class, we set an attribute to be equal to an entire class. we then can access the classes method through the attribute:
+
+self.resloc =resdetail()
+
+then to access the methods
+
+res.resloc.detail()
+res.resloc.manager()
+
+we can import classes, too:
+
+from class2 import Pizza
+
+the name of the class must be exact. the module name must be mentioned, too. we can import multipe classes seperated by commas
+
+from class2 import Pizza, resloc, resturant
+
+and we can essentailly keep everything nice and tidy
+
+we can also import an entire module, instead of it's classes and use dot notation to accesss specific classes:
+
+import class2
+
+res = class2.resturant("Jack", "Large", "Garlic")
+res.receipt()
+
+using this logic, we can use predefined modules (import them) in our own code. such as the random module. it has a method called randint() which generates a number between two integers. like so
+
+from random import randint
+
+print(randint(3,4))
+
+the list or tuple version of this is choice()
+
+from random import choice
+
+select = ['bob, 'joana', 'kikie']
+print(choice(select))
+
+write docstrings in each class, and each module too
+
+you write imports from standard libraries before you write imports for your own modules or classes

@@ -1,0 +1,13 @@
+Tuples:
+
+Lists that cannot have their values changed. So we just instantiate them using round bracketes instead of square ones:
+
+something = ('hey', 'you','run')
+And we can play with them the same way. The only thing about them is to instantiate one variables:
+something = ('hey',)
+We need that comma
+
+We can overwrite tuples by instantiating a variable of the same name with different values:
+something = 2,3,4,5
+
+edex

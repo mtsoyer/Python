@@ -1,0 +1,87 @@
+we can make a file that ignores pychace:
+save a file as .gitignore
+open up the terminal, and rename the file from .gitignore.txt to .gitignore
+
+Making a repository:
+go to the folder, and run the command:
+>>git init
+
+a repository is a group of files in a program that Git tracks. .git, a hiden directory is where the stuff for git is. 
+
+to check the status of them:
+>>git status
+
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .gitignore
+        hello_git.py
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+this shows. a branch is a version of the project we're working on. a commit is a snapshot of the porject at a particluar time - like a save. untracked files means that we haven't told Git what to track yet. we can add files using: 
+>>git add . 
+
+which adds all files that aren't being tracked. doing another git status shows:
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   .gitignore
+        new file:   hello_git.py
+
+making a commit:
+>>git commit -m "Started project."
+
+C:\Users\Motheo\Documents\Python\GitExampple>git commit -m "Started working on the project."
+[master (root-commit) fef8c34] Started working on the project.
+ 2 files changed, 2 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 hello_git.py
+
+we commited, and added -m which is message that says what we've done. the second line shows that we're on the master branch and the thrild line shows that two files changed. making a status shows:
+
+On branch master
+nothing to commit, working tree clean
+
+that our working tree is clean. this is the ideal message we want. 
+
+using git log we can see all the changes made to the project. git log --pretty=oneline
+
+makes the entire thing on one line. 
+
+another commit;
+adding another line to our program hello_git.py will demostrate this
+
+when we change a file, and check the status, we'll see git has detected a file change. we can commit the changes again:
+
+git commit -am "Now, a bye"
+
+this says we change one file. checking the status shows we have a clean tree, and checking the longs shows that I had made a commit with the message "Now a bye"
+
+in git commit am- "Message"
+a means to pass all modified files, and m is the message
+
+reverting a change:
+let's say you made a change to your file, but you haven't commited it yet. use
+>>git checkout .
+to revert the changes of an uncommited file back to the previous commit
+
+to revert previous commits, we need the first 6 characters of the ID with the changes we want to revert away:
+
+this leads to a detached head state. HEAD is the current commitment of the project, and it's detached because you've left the main branch (master in this case). to get it back to the master branch:
+
+>>git checkout master
+
+it's best not to make any changes to your project when you've checked out an old commit. unless you want to discard all the recent stuff and work with old saves, then don't do it. you can reset to an old commit entirely:
+
+>>git reset --hard {last 6 characters} 
+
+remember to always use git status before doing anything, to make sure you're on the right branch
+
+you can delete the git history, which deletes the history of commits. It doesn't change anything about the file you're working on as it stands though. we can manauully find the .git file, or open the CL:
+>>rm -rf .git
+or
+>>rmdir /s .git

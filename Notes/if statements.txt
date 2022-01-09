@@ -1,0 +1,60 @@
+If statements:
+A simple comparisio is:
+if car == 'something':
+	print("me")
+else:
+	print("summersault")
+We can negate capital letters in an if statements by making the variable lower case in the condition. This won't make the variable lowercase in the entire progam:
+
+car = 'YOU'
+if car.lower()=='you'
+print("peg me")
+
+inequalites are the same as in java, too:
+!=
+
+Numerical comparisons are the same, too,.
+Greater than, equal to and stuff work with numebrs as well
+
+AND and OR:
+you can check if two statemnts are the same by just using and inbetween both statemnts:
+if age==21 and age> 1
+You can use parethases around each statment to make them look cooler
+
+we use or if we want to be true:
+if age== 21 or age > 1
+We can check if something is in a lsit:
+mushrooms = ["hey","heyno"."nigger"]
+if "hey" in mushrooms
+print("fart")
+
+to chekc if it'snot there, we say:
+if 'person' not in mushrooms:
+print("pepesadge")
+
+If and Elif else chains:
+Chains are just sequences. And if then an else is an if-else chain.
+
+Python runs an if, elif and else in order. If one of thsoe tests come true, then it'll skip the other tests. It's usueally 3 statements.
+
+if something < 4
+ print("me")
+elif < 18
+ print("something else")
+else
+print"me")
+
+look how else is the only one without a statement next to it. Also, this is bad. We can work with price or another value and use that in an all together output:
+
+if something < 4
+ value = 0
+elif < 18
+value = 1
+else
+value = 3
+print(f"Your ticket price, loser, is {value}")
+
+We can put uncapped elif statemnets. an else statement isn't necessary at all. else applies to the failed tests in the previous blocks, so that can mess up your program entirely
+
+We use a series of if statemnetse if we wanna test a bumch of things with out skipping anything. 
+

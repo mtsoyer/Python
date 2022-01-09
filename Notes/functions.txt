@@ -1,0 +1,209 @@
+functions are like methods, and can be stored in files called modules that are like classes. defining a method is as simple as:
+
+def greet():
+	"""to greet the world"""
+	print("Hello world")
+greet()
+
+the name of the function is after the "def" which means define. and it can show what the function is fore. it has parentheses if it needs information to do its task.
+
+three quotation marks are called docstrings which is the description of the method and what python uses to generate its description
+
+to call a function we just type it's name.
+
+by adding an argument we can specify what world we're greeting. it does not need to be specified at all:
+
+def greet(planet):
+	"""to greet the world"""
+	print(f"Hello {planet}")
+greet("Pluto")
+
+in the method header, we have parameters and in the call, we transfer an argument from the call to the parameter 
+
+Positional Arguments 
+when the arguments passed are in the same order as the parameters. such as:
+
+def greet(planet, you):
+   """greets a planet""" 
+		print(f"Hello {planet}, I am {you}") 
+greet("Venus", "Papa Jo") 
+
+the function works properly because the arguments were in the correct order
+
+Keyword Arguments:
+we can specifically assign the parameters to values to avoid mix up of arguments:
+
+def greet(planet, you):
+    """greets a planet""" 
+    print(f"Hello {planet}, I am {you}") 
+
+greet(planet = "Venus", you = "Papa Jo") 
+
+the order doesn't matter, as long as the correct arguments are assigned to their correct parameters 
+
+Default Parameters
+we can assign default values to parameters. this essentially allows us to make a function that can be overloaded if needed:
+
+def greet(planet, you = "Christian"):
+    """greets a planet""" 
+    print(f"Hello {planet}, I am {you}") 
+
+greet(planet = "Venus") 
+
+but if we want to specify who we are, we can just pass another argument and python will ignore the default value:
+
+def greet(planet, you = "Christian"):
+    """greets a planet""" 
+    print(f"Hello {planet}, I am {you}") 
+
+greet(planet = "Venus", you = pepe) 
+
+the arguments do not all have to Be keyword, default or positional. you can mix and match keyword, default or positional arguments 
+
+Returns:
+we can return a specific value from a function.
+
+we can use F strings for more than outputting - we can form a sentence value for a variable too
+
+def artist(name, surname):
+	value = f"{name.title()} {surname.title()}"
+	return value
+print(artist("Jimi", "Hendrix"))
+
+We can also create a dictionary in a function and return it:
+
+def artist(name, surname):
+	person = {"Name" : name, "Surname" : surname} 
+	return person
+print(artist("Jimi", "Hendrix"))
+
+* Note, you can use None instead of null for no data or anything 
+
+we can use any python structure with a function. here's a program to enter your name and surname with awhile loop, and to break when you enter a value:
+
+def artist(name, surname, age = None):
+	person = {"Name" : name, "Surname" : surname, "Age":  age} 
+	return person
+print(artist("Jimi", "Hendrix"))
+
+while True:
+	message = input("Enter your name ")
+	name = input("Enter your surname ")
+	age = input("Enter age. Type Q to quit ")
+	if age == "Q":
+		break
+	else:
+		man = artist(message, name, age)
+		print(man)
+		for v, n in man.items():
+			print(f"{v} {n} is you")
+			continue 
+
+something like this 
+
+we can parse lists into a function. the function has then full mobility with the list. for example:
+
+def greet(name):
+		for v in name:
+			print(f"Hello, {v}")
+start = ["Jessica", "Jennifer", "Tissiana"]
+greet(start)
+
+we just treat it as an ordinary list 
+We can modify the list in a function. The modified list is permanent:
+
+def print_models(unprinted, printed):
+	""" method to put things from unprinted list into printed"""
+	while  unprinted:
+		thing = unprinted.pop()
+		print(f"{thing} is being processeed")
+		printed.append(thing)
+
+def completed_models(printed):
+	""" method to print out what was processed"""
+	for n in  printed:
+		print(f" {n} was printed")
+
+a = ["Paper mache", "Cardboard paper", "Kazuki", "Rule 34 ideas"]
+b= []
+print_models(a, b)
+completed_models(b)
+	
+
+this takes the things in one list, and adds them to another - telling us what has been removed, and the final state of the last list. It's good to make sure a function has one job, to avoid having to change a lot and mess up everything.
+
+Let's say you don't want to change the original list, because you want to save a copy for records. WE can change a copy of the list, like so:
+
+function_name(listname[:]
+
+we split lists to the last element in the list to copy it. in context:
+
+def completed_models(printed[:]):
+
+but it's not adviasbale to create copies, for memory and time reasons
+
+what if you don't know the number of argumetns to be passed? put an asterics before the parameter in the method header. python opens a tuple and packs all the agruments passed into the tuple, and we can play with the results:
+
+def toppings(*top):
+	for v in top:
+		print(f"The topping added was {v}")
+message = input("Please enter the toppings you want. ")
+lip = input("Please enter the toppings you want. ")
+count = input("Please enter the toppings you want. ")
+toppings(message, lip, count)
+
+this inputs the topings you want. it can be multiple. you can imrpive it with a while loop and all that jazz. 
+
+when you combine different arguments, python needs psitional and keyword arguments first, then defualt or abitrary arguments last. 
+
+we can mix different arguments, for example, inputting key value pairs in a dictinary defined in the function with two value that are input via keyword arguments:
+
+def user (first, last, **additional):
+	additional["First"] = first
+	additional["last"] = last
+	return additional
+
+me = user("Jonathan", "Chris", location = "summertime", country = "South America")
+print(me)
+
+this builds a dictionary in the "me" line, by having the parameter in the fucntion with two ** to signifiy a dictionary. Then we can pass actualy key pair values as arbitrary keyword arguments (they know it's a dictionary, but not how many) and we can create a list by assinging the first two values into the dictionary. the ** doesn't actually siginfy dictionary, but it shows (unsepficif keyword arguments). it can be anything, but the data passed in those arguments has to be consistnet like a keyword argument
+
+in defining something lilke this, make sure that you parse a key valyue pair like you would another argument:
+
+pizza( "cheese", "hey no", key = "keyvalue")
+
+we can store functions in modules, which are seperate files and import these modules into the class we are working with. this allows us to share methods between one another.
+
+modules end, too, in py. we just type the function we want, and we can import it in our main class by saying:
+
+import classname
+
+we use the classname as the link between classes, or the object. and we access the methods or anything from the other classes using classname. and then whichever methid or value you want
+
+you can also import specific functions:
+
+from module import function
+
+such as
+
+from class1 import makepizza
+
+makepizza(12, "ham")
+
+we don't need dot notation because we imported the function itself. 
+
+we can give a function an alias, in case we already have a function with it's name:
+
+from class1 import makepizza as mp
+
+we can give a module an alias, too:
+
+import class1 as mp
+
+we can import all functions within a module:
+
+from class1 import*
+
+which imports everything. it's best not to do this without using dot notation, because the functions can overwrite with one another/ variables can overwrite one another. or import specific functions.
+
+keyword, or arbitrary, or default arguments mustn't have a space between the equal signs 

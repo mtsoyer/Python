@@ -1,0 +1,61 @@
+Everything to do iwith lists:
+to change the value of something in a list, we jsut say:
+me[0] = 'something'
+
+To add stuff to a list..
+Apeedning the elemtents to the end of a list:
+me.append('hey') - this will add the thing to the end of a list
+and increases the lists size
+
+We can build lists just by appending them throughout the app.
+
+Inseting elements inot the list:
+We can take a osition and put something new there. It just shifts everything os nothing is deleted and everything moves one to the right
+
+me.insert(3, 'apple')
+
+Removing stuff:
+we can use del STATEMENT:
+del me.something[3]
+
+We can use pop() METHOD:
+this doesn't just delete stuff: it allows you to still work with it. We store the thing we popped into a variable:
+
+popped_person = me.pop()
+print(popped_person)
+
+It pops the last item in the list
+
+We can put a parameter into the parameters to determine the index we want to pop:
+popped_person = me.pop(0)
+
+We can use the remove() METHOD to remove things by value, and not by position:
+
+me.remove('hey you so fiiine')
+
+We can also put the thing we want to delete in a variable, and say to remove that. Like a maekshift pop:
+mesage = 'hey you so fiiine'
+me.remove(message)
+print(f"{message} was ass")
+
+Note that remove removes the first instance of the thing you want to remove. We need to use a loop to get rid of all of em.
+
+We can sort lists permanentley with:
+sort()
+we can reverse this by passing the argument reverse=True to the sort method
+
+cars.sort()
+cars.sort(reverse=True)
+
+we can sort things impermanentley using the sorted() method
+this sorts it but not forever. we use it in conjunction with print
+print(sorted(cars))
+
+it can also accept a reverse=True argument
+
+We can reverse a list using the reverse() method, but it's not alpahebtical or anything, It's just in reverse:
+cars.reverse()
+
+We can find the lenght of a list using the len() method
+it returns an integer, not the final index of the list
+The list or whatever you want the length for is the parameters

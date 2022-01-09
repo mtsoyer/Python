@@ -1,0 +1,73 @@
+Python notes:
+
+Chapter one:
+Right click on windows to open terminal
+
+Use cd to change the location of the thingie to look where the directory is
+
+Use dir to display the contents of the directory
+
+Use python to use python files
+
+Variables:
+They cannot start with a number
+
+they cannot have spaces
+they should be short
+
+Strings:
+They can be declared using double or single quotatin marks
+
+we combine strings by making f-strinsg. f means format and it takes the thinsg in the bracketes and puts them together
+
+we print variables using brackets. we don't split up quotatin marks. and we put the f before the quotation marks
+
+you put f when you wanna join variables in an output statement, or in a normal variable. if you don';t put the f in an output statement, it just prints out the variable name in brackets.
+
+\n is new line, and \t is tab in outputting
+
+Removing whitespaces: rstrip() but for the right side of the word. use lstrip() for the left side and strip for both
+
+Numbers:
+
+Integers
++-/* work in python
+two ** = exponents
+
+Floats:
+Anything with a decimal point
+Division of anything will end up in a float
+Any function with a float results in a float
+You can use underscore to make reading numbers better: 200_00_00
+
+Variables:
+You can assign data to variables in one line:
+x,y,z = 0,0,0
+
+Constant Variables:
+Variables whose values do not change. We write them using capital lettes only
+
+Comments:
+You write comments using a hastag
+
+Zen of Python:
+import this
+and you'll get the basic principles of python
+
+Lists:
+Stores sets of items and data together in one place. Like arrays, it can contain anything. 
+We create one like:
+bycicles = ['trek', 'you', 'me']
+and print them like
+print(bycicles)
+
+The output is everything in the list with square brackets
+
+The items are sotred in an index starting from 0. To access one we can just say:
+print(bycicles[0])
+It doesn't output square brackets or apostrophes.
+You can use methods like title on these things assuming they are words
+
+To access the last element, and you don;t know what is is, you can say
+bycicles[-1]
+-2 returns the second last and -3 returns the 3rd last and so on

@@ -1,0 +1,119 @@
+testing code:
+
+Unittest allows us to test our code. it checks if one aspect of a function works correcntly. a test case is a group of unit tests that check if a funtion works correctly in all possible inuts.
+full coverage test cases are big, so it's better to use them on large scale products
+
+A passing test:
+we import the unittest module, and write a seriers of methods to test the funtion we created. In a method that takes as input a name, and capitalises it and makes it neat, heres the test:
+
+import unittest
+from namefunction import getformattedname
+
+class NameTest(unittest.TestCase):
+def test_name(self):
+formatted_name = getformattedname("janis", "joplin")
+
+self.assertEqual(formatted_name, "Janis Joplin")
+
+if __name__ = "__main__":
+unittet.main()
+
+We import both unittest and the function we want to test. it's best to name the class we're using to test, with the word test in it such as NameTest(). we are inheriting from unittest.TestCase hence it's in the parameters of our class
+
+NameTest has one method that tests one functionality of getformattedname(). we call this method test__name() because we're testing the name. when we start a method with test__ runs automatically when we run the class. we call getformattedname() and use an assert method - a powerful method that checks if the answer received equals the answer expected. 
+
+variable __name__ is set when the program is run. if this file is run, name is set to __main__ because it's then used as the main program. we then call unittest.main() which runs the test case. however, if this file is imported, name wont be set to main because THIS FILE is not being run. the other one is. the output is:
+
+Ran 1 test in 0.000s
+
+OK
+
+there's a dot above this, which says one succesful test was run
+this output says our function will work for all names
+
+Failing a test:
+The output for a failed test:
+
+E
+ERROR: your error
+and a traceback call
+
+it will still give us the time it ran, but a count of the errors in it
+
+E means that means one test unit in the test case failed. it then tels us specifically whihc method failed. when a test fails, change your code so that the test passes
+
+Adding new tests:
+we can add a new test within the same class, like so which tests if a middle name parsed in the method would still work:
+
+    def testNameMiddle(self):
+        formatted_name = get_formatted_name("john","johna","jamerson")
+        self.assertEqual(formatted_name, "John Johna Jamerson")
+        
+
+this was added just under the previous method. it's best to have the name and main conditional structure at the end of the file.
+
+Testing a class:
+assert methods test whether a condition you think should be true, is true or not. the following assert methods all do that from Table 11-1. note, these can only be used in the child class of an unittet module, i.e your class has to inherit from the unittest.TestCase. 
+
+assertEqual(a, b) checks if a == b
+assertNotEqual(a,b) checks that a!= b
+assertTrue(x) checks if x== True
+assertFalse(x) checks if x==False
+assertIn(a, list) checks if a is in list
+assertNotIn(a, list) checks if a is not in list
+
+testing a class isn't too hard, such as in a program that conducts annonymus surveys.
+
+what if we want to allow more than one response each. and so on. but changes could break the program, hence a test
+
+we can write a test that verifies that one input is correct:
+
+import unittest
+from mysurvey import AnonySurvey
+
+class SurveyTest(unittest.TestCase):
+    def test__surveyone(self):
+        question = "What language do you speak?"
+        survey = AnonySurvey(question)
+        answer = "English"
+        self.assertEqual(answer, "English")
+if __name__ == "__main__":
+    unittest.main()
+
+keep in mind, the program depends on having a value for question. 
+
+what if we want to check if multiple responses are good (multiple answers from different people)?
+
+    def test_surveythree(self):
+        question = "What language do you speak?"
+        survey = AnonySurvey(question)
+        answer = ["English", "Afrikaans", "Kantonese"]
+        for response in answer:
+            survey.store_response(response)
+        for response in answer:
+            self.assertIn(response, survey.responses)
+
+if multiple people input an answer, this makes sure that the answers input are stored in the list survey.responses with the self.assertIn() method. we can make these tests more efficeint though:
+
+setUp():
+setUp() allows us to create one object, instead of multiple, and use that in our methods in our test class. this method runs before the other methods do. we can use setUp() to store the question, and responses that we use for testing:
+
+    def setUp(self):
+        question = "What language do you speak?"
+        self.survey = AnonySurvey(question)
+        self.answer = ["English", "Afrikaans", "Kantonese"]
+    
+    def test__surveyone(self):
+        self.assertEqual(self.answer[0], "English")
+
+    def test_surveythree(self):
+        for response in self.answer:
+            self.survey.store_response(response)
+        for response in self.answer:
+            self.assertIn(response, self.survey.responses)
+
+we just create an object, and have all relevant data store inside the object. we then use the object around all the methods, instead of creating a new object for every single method
+
+in the terminal output, a . means a test was passed. an E means an error occured, and an F means it was a fail.
+
+remember, you have to test methods that return an answer

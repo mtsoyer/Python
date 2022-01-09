@@ -1,0 +1,64 @@
+Working with lists
+using a for loop to printout contents:
+for magician in magicians:
+ print(magician)
+this sets the values in list magicians into magician and prints them until the list is done. indent the following statement in the for loop, and it also has a colon at the end
+
+The following statements after the for loop, if they are indented will be printed. they dont have to be if you dont want to loop those statements
+
+Making lists with numbers:
+
+ the range() method generates a series of numbers. 
+
+for value in range(1,4):
+print(value)
+
+this prints values from 1 to 3. the last value is the last value - 1. It's a for loop, too.
+
+passing only one argument through the function returns the numbers from 0 to less than the second number
+
+we can use range to make a list
+listme = list(range(1,4))
+
+we can choose how the value increment in range by using a third argument:
+evennumbers = list(range(2,11,2))
+which essentially stores every second number in evennumbres list
+
+we can start creating instructins in the loops to square values from the range 1 to 10, and put them into a list and output that list
+
+creating a list with no content is just []
+
+Simple functions:
+min(paremeter)
+max
+and sum
+find stuff.
+
+List cmprehensions:
+generaties numbers in one line. You say
+huh = [(the instruction for value) for value in range(x, y)] t
+
+this fills the list with value from x to y, and it does the dunctin you want for value
+
+Slicing lists allows you to use only portions of the list. after the name of the list, you pass two arguments in the parameters :
+huh[2:4]
+It's in index format, and it doesn't return the second value
+
+If the first value is empty, it starts at the beginning of the list
+huh[:4]
+If the second one is empty,  it goes until the last value inclusive
+
+Passing a third argument sets the steps it takes, so every 1st, seci=ond or third number
+
+We can use this with a for loop to use only a few things in a list:
+
+for value in huh[:3]
+ print(value)
+
+Copying a list:
+we do this by making a slice from the beginning to the end of a list. this makes a copy that we can store somewhere
+
+variable = huh[:]
+
+If you equate two lists, or variables, you can treat them as one in the same because they'll have the same information. (pg 102)
+

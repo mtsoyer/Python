@@ -1,0 +1,186 @@
+to import a voxel, we crate a class with inheritance form the buttom class because as we click a voxel
+we want another voxel right next to it:
+
+class Voxel(Button):
+    def __init__(self):
+
+we give it a set position of 0,0,0:
+position = (0,0,0)
+and an origin_y of 0.5
+
+the origin shift lifts it up slihgtly
+
+you always have a color with texture
+
+to create multipe buttons:
+for z in range(8):
+    for x in range(8):
+        voxel = voxel
+
+the z loop describes voxels from 8 blocks forwards and backwards, and left and right by 8. effectively, this is
+64 blocks
+
+to let us see them, we give it a position in the child class of our voxel class:
+remember how we set up the position to be 0,0,0 in the method?
+
+def __init__(self, position = (0,0,0)):  optional paremeter
+
+and in our voxel call, we can use the values of the for loop, to change the position of the blocks
+voxel = voxel(position = (x, 0, z))
+
+remember, position has to be a tuple
+
+to make a first person character:
+from ursina.prefabs.first_person_controller import FirstPersonController
+
+then we assign an object called FirstPersonController() to a variable, and that's it. we 
+can set base x, y and z coordinates if we want:
+player = FirstPersonController()
+player.x = player.z = 5
+player.y = 12
+
+or anything. but this isn't necessary
+
+we can creae a function that closes the program when we press a key:
+def input(key):
+if key == "q" or key == "escape":
+quit()
+
+note how this function can stand by itself, and the input function takes in as input the keyboard
+without any other code. 
+
+a first person character has everything, movement, looking, etc
+
+increasing the range from earlier, we can make the landscape larger
+
+for making blocks, all we want to do is look at a voxel and as we press down, we want a  new voxel to be
+created ontop of that voxel:
+
+we create an input for the left mouse click, and if it's true, we create a voxel with the same postion 
+added to mouse.normal:
+
+...
+voxel = Voxel(pos = self.position + mouse.noraml)
+
+you can't jump and place a block at the same time. also, "white_cube" is not the same as
+"white_color/white_block" etcetra.
+
+the normal is the surface we look at, and on a flat ground, the blocks point upward to the sky, hence it's their
+normal (like in physics)
+when we use self.position + mouse.normal we are getting the coordinates of the surface in question
+and adding the normal to it to place a block above it. the normal changes as the direction of the surface
+changes
+
+we can destroy voxels and objects using destroy(self) if the object we want to destory is self:
+if key == "right mouse down":
+                destroy(self)
+ this allows us to break blocks
+
+ Making it look pretty:
+ We can specify rgb values in color = color.color()
+ eg:
+ color = color.color(0,0, random.uniform(0.9, 1))
+
+ color.color gives us the option to use rgb coloring. we set red and green to 0, and blue we give it a 
+ random value between 0.9 and 1. meaning, only two values will be picked, giving it a better textualised
+ color even if techinically they just white (because we set our texture to white_cube). however if you set red 
+ to 1, nothing changes, but if you set green to 1, everything will change. (???)
+
+ getting a custom block cannot happen using Ursina, because they don't utilise UV textuers, which is a 
+ texture standard for objects such as a minecraft grass block. We use blender to create our own, then we import
+ it into Urisna for use:
+
+ in model:
+ model = "assets\block" where block is the folder of everything
+ then we can import textures, multipe. it's best to initalize a variable for each texture
+
+ note, app = Urisna() has to be at the top of the file (before the importing of textures)
+
+ to import textures:
+ eg:
+ grass = load_texture("assets/grass/png")
+
+ the reason everything looks wonky, is because the butotns we improted are a different size than the ones already
+ made.
+change the scale:
+scale = 0.5
+
+it's advisable to remove the highlight color, because it looks weird. another thing we can do is to change 
+the voxels we place down:
+
+we make am optional parameter for the texture of the voxel in the voxel class 
+in the input for the left mouse, we can pass another argugment that will let us use another textur
+when we press left click
+
+we can make an input to let us pick any type of textureL
+we can make an input that updates like we did before, and if buttons 1 through 4 are pressed
+we change the number of a GLOBAL variable. this variable in our other input, will make it so that a specific
+texture is picked. note, you can have an if statement on one line:
+
+def update():
+global block_pick
+if held_keys["1"] : block_pick = 1
+if held_keys["2"] : block_pick = 2
+if held_keys["3"] : block_pick = 3
+if held_keys["4"] : block_pick = 4
+
+...
+if key == "left mouse down":
+if block_pick = 1 : voxel = voxel(pos = self.position + mouse.normal, texture = "grass")
+
+and so on. defining a variable as global means we can use it anywhere in the class. you still have to insantate
+the variable at the beginning of the class
+
+Creating a skybox:
+we're just creating a giant sphere with a texture:
+class sky(Entity):
+    def __init__(self):
+        super().__init__(parent = scene,
+                         model = "sphere",
+                         texture = sky_texture)
+
+this creates a sphere (note sky texture has been imported at the begining. also, don't forget to
+inintalie the sky class)
+
+to make it larger, we scale it and put ourselves inside it:
+scale = 150
+double_sided = True
+
+now we can add a hand:
+
+create a class called hand with inhereitence from entity.
+if we set parent to camera.ui, we are placing an object in the 2d space of OUR POV. this is like
+on top of the game, and is not affected by the game.
+
+class arm(Entity):
+    def __init__(self):
+        super().__init__(parent = camera.ui,
+                         model ="assets/arm",
+                         texture = arm_texture,
+                         scale = 0.2,
+                         position = Vec2(0.4, -0.6),
+                         rotation = Vec3(150, -10, 0))
+
+note, our hand was large so we scaled it small. our position is in 2d because canera,ui is in 2d, but our
+rotation is in 3d because we want to have a 3d looking arm
+
+we can create a function that changes the position of the arm as the function happens, such as active and active:
+def active(self):
+        self.rotation = Vec3(150, -10, 0)
+        self.position = Vec2(0.3, -0.5)
+
+within the class arm, this changes it. in our update function, we can create an if statement that calls the 
+active function if we click right or left mouse, and if we don't, it must call the passive one:
+if held_keys["left mouse"] or held_keys["right mouse"]: arm.active() 
+    else: arm.passive()
+
+sound:
+we have to import the sound we want. like load_texture, sound has a class called
+Audio. we parse the file location, and a second parameter to make sure the sound plays once, and a third
+one that controls autoplay. we make it so whenever we click or break a cube, we play a sound:
+
+Small additions:
+we can disable the fps counter:
+window.fps_counter.enabled = False
+we can also hide the x button:
+window.exit_button.visible = False

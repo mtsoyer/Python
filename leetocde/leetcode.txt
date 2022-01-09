@@ -1,0 +1,184 @@
+enumerate:
+this funciton returns the index, and the value of each item as it's looped through in a list:
+
+for x, y, in enumerate(list example):
+...
+
+
+in TwoSum, where the sum of two values in a list that add up to Target, are returned, the followign can be done:
+
+class Solution:
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        h = {}
+        for i, num in enumerate(nums):
+            n = target - num
+            if n not in h:
+                h[num] = i
+            else:
+                return [h[n], i]
+
+
+where we enumerate nums, making an index and value pair for each element in the list
+i is the index, and num is the value
+
+what it does, is places the values in nums, and finds the differences between them and the target and stores it as n. 
+
+then it checks if that difference is in h. if it is not in h, then the value that made that difference is stored as the key, and it's value is stored as it's indice from the original list
+
+if it comes around that the difference IS in the object h, then the indice of the value in h is returned, along with the indice of the value that made n
+
+this ends up returning the two indices of the values that add up to target
+
+Remember, the valuet ypes in python are:
+str - string
+int - integer
+
+here is a conversion of roman numbers to real numbers:
+class Solution(object):
+    def romanToInt( s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        mydict = {'I':1, 'V':5, 'X':10 , 'L':50, 'C':100, 'D':500, 'M':1000}
+        finalnum = 0
+        for i in range(len(s)-1):
+            if mydict[s[i]] < mydict[s[i+1]]:
+                finalnum -= mydict[s[i]]
+            else:
+                finalnum += mydict[s[i]]
+        finalnum += mydict[s[-1]]
+        return finalnum
+
+firstly, a dictionary is made for all the type of symbols
+then a varable finalnum is where the number will be
+
+it goes through the length of the word, and it compares the first letter to the second letter. this is because  in roman letters, IV, where the smallest number is before a bigger number, it turns into subtraction, henceforth IV is 4. but if this isn't the case, then it turns into positive: VI is 6. so that's what happens in the first if statment: if the value before is small, then it turns into a negative and finalnum is negative. then when this chain ends, where the big numbers are present, then it turns into addition. 
+here's another solution:
+
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        
+        roman_dict = {'I':1, 'V':5, 'X':10, 'L':50, 'C':100, 'D':500, 'M':1000}
+        sub_cases = ['IV', 'IX', 'XL', 'XC', 'CD', 'CM']
+        
+        result = 0
+        prev_letter = ''
+        
+        for char in s:
+            if prev_letter + char in sub_cases:
+                result += roman_dict[char]-2*roman_dict[prev_letter]
+            else:
+                result += roman_dict[char]
+        
+            prev_letter = char
+        return result
+
+where it takes into consideration the previous character. a pattern to recognise in roman charactesr is that there will always be a paring of IV, IX, XL, XC, CD or CM. this solutin uses this, and does this:
+enters a character and converts it. it stores is as a pevious character
+then it checks if the previous charachter and the current one add up to the aforementioend patterns. if it does, it does the necessary calculatios that just work. or else it continues
+
+list functions:
+we can use the functions attributed to list, by using the list() which contains mehods like sorted(). we can use sorted() to sort a list by the size of each element, from smallest to biggest:
+
+list(sorted(cars, key=len)) 
+we use an optional parameter called key, that tells by what we are sorting by
+
+This is my solution to finding the longest prefix amongst a series of words:
+
+       flag = False
+        stringbuilder = ""
+        temp = list(sorted(strs, key=len))
+        word = temp[0]
+        for char in range(0, len(word)):
+            for words in strs:
+                if word[char] == words[char]:
+                    flag = True
+                else:
+                    flag = False
+                    break
+            if flag:
+                stringbuilder += word[char]
+            else:
+                break
+        return stringbuilder
+
+first it establishes varaibles, then it orders the list by each word's length. this is because we are gonna use the shortest word, and we will take this word and compare it to other words. the moment that both words that are being compared have different characters, both loops break
+
+the zip(*values) method takes whatever was placed as an argument, and forms a tuple with them. for example:
+
+>>> numbers = [1, 2, 3]
+>>> letters = ['a', 'b', 'c']
+>>> zipped = zip(numbers, letters)
+
+produced 3 tuples, of:
+(1, "a"), (2, "b") and so on
+
+the set() method takes a list or anything as a parameter, and takes away any duplicates to produce a unique list or array
+
+a 10ms shorter solution is this:
+
+    def longestCommonPrefix(strs):
+        prefix=""
+        if len(strs)==0: return prefix
+        
+        for i in range(len(min(strs))):
+            c=strs[0][i]
+            if all(a[i]==c for a in strs):
+                prefix+=c
+            else:
+                break
+        return prefix
+
+where it first returns nothing as a fail safe to avid errros. then it loops through the shortest word but it stores the first letter of the first word of the list
+
+it then checks if all the chracters at that speicfic point in each word in the array have that same character using:
+
+if all(a[i] ==c for a in strs
+where a is the word in strs, and i is the point at which it's getting the word
+
+it then builds a string or it breaks the loop
+
+another solution uses zipped as well:
+if not strs: return ""
+        if len(strs) == 1: return strs[0]
+        
+        strs.sort()
+        print(stsr)
+        p = ""
+        for x, y in zip(strs[0], strs[-1]):
+            if x == y: p+=x
+            else: break
+        return p
+
+this at the top accounts for really short, or empy lists. the body sorts the list in alphabetical order. this is because if you do that , the most similar words which have the most charachters similar to one another will be near the front of the list, whilst the most dissimilar words will be at the back. the loop checks this, by comparing the charactesr in the string of the first word, and that of the second:
+the moment they don't equal one another, they break. if they do, they build up string p
+
+zip helps in reducing the amount of content to loop through. as seen here, assume the first and last word is reflower and flight:
+
+the first loop would irerate through:
+("r", "f") where r is y and f is x. without zip, this would be:
+("reflower", "flower") which is too many charachtes to perfrom the specified functions apon
+
+note, in working with dictionanries, if an occurence of anything appears in a dictionary as a key in the dictionary, then finding if it's in there will always ring true:
+
+dict = "my" : "name", "is": "green"
+
+print ("my" in dict + " " + "green" in dict)
+prints out True, False
+
+also, when you're using the pop() method, it doens't just do the function. it technically means that:
+
+if stack.pop == x
+actually means
+if (the popped value) == x
+
+it also means that the value, stack, actually undergoes pop and loses an element
+
+
+
